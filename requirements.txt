@@ -1,0 +1,7 @@
+numpy
+opencv-python
+PyYAML
+insightface
+onnxruntime-gpu   # use "onnxruntime" for CPU-only machines
+faiss-cpu         # optional: the matcher falls back to NumPy without it
+pytest            # dev

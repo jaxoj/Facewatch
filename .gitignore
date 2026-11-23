@@ -1,0 +1,5 @@
+.pytest_cache   
+data/
+venv/
+config.yaml
+tests/pycache/

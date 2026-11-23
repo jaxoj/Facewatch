@@ -1,0 +1,35 @@
+log_level: INFO
+display: true               # show annotated windows (needs a desktop session)
+reload_interval_s: 60       # re-read the watchlist DB so enrollments apply live
+
+analyzer:
+  model_name: buffalo_l
+  det_size: [640, 640]
+  ctx_id: 0                 # GPU index, -1 for CPU
+  min_det_score: 0.6
+  min_face_px: 40           # ignore tiny faces, they match badly
+
+matching:
+  threshold: 0.45           # cosine similarity; tune on your own data
+  index: auto               # auto | faiss | numpy
+
+tracking:
+  iou_threshold: 0.3
+  max_age: 15
+
+confirmation:
+  window: 5                 # look at the last N frames of a track
+  min_hits: 3               # same person in at least M of them
+  cooldown_s: 30            # per camera + person, avoids alert spam
+
+watchlist:
+  db_path: data/watchlist.db
+
+alerts:
+  log: true
+  snapshot_dir: data/alerts
+  webhook_url: null
+
+cameras:
+  - {id: gate-1, uri: "rtsp://user:pass@192.168.1.10/stream1", process_every_n: 2}
+  - {id: lobby,  uri: "rtsp://user:pass@192.168.1.11/stream1"}
